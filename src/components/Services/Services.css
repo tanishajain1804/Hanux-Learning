@@ -1,0 +1,72 @@
+/* Custom styles for Services Cards */
+
+/* 3D Popping Service Cards */
+.service-card-3d {
+  background: white;
+  border: 1px solid rgba(13, 27, 62, 0.07);
+  box-shadow: 
+    0 10px 30px -5px rgba(15, 23, 42, 0.03),
+    0 2px 6px -2px rgba(15, 23, 42, 0.01),
+    0 4px 0px 0px rgba(15, 23, 42, 0.05); /* neutral solid bottom */
+  transform: translate3d(0, 0, 0);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-3d:hover {
+  transform: translate3d(0, -12px, 0) scale(1.015);
+  border-color: var(--theme-color);
+  box-shadow: 
+    0 24px 48px -10px var(--glow-color),
+    0 10px 20px -10px rgba(15, 23, 42, 0.06),
+    0 8px 0px 0px var(--theme-color); /* colored 3D bottom base on hover */
+}
+
+/* Elegant tech badges at the bottom */
+.tech-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: var(--glow-color);
+  color: var(--theme-color);
+  border: 1px solid rgba(13, 27, 62, 0.04);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.service-card-3d:hover .tech-badge {
+  border-color: rgba(13, 27, 62, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px var(--glow-color);
+}
+
+/* Card Arrow Icon */
+.card-arrow-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(13, 27, 62, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  background-color: rgba(250, 245, 236, 0.5);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.service-card-3d:hover .card-arrow-circle {
+  background-color: var(--theme-color);
+  border-color: var(--theme-color);
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px -2px var(--glow-color);
+}
+
+.card-arrow-circle svg {
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.service-card-3d:hover .card-arrow-circle svg {
+  transform: translate(1px, -1px);
+}

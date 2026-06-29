@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-bg3: var(--bg3);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  
+  --color-border-card: var(--border);
+  --color-border-card-hover: var(--border2);
+  
+  --color-text-main: var(--text);
+  --color-text-muted: var(--muted);
+  --color-text-muted2: var(--muted2);
+  
+  --color-accent-core: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-heading: var(--font-heading);
+}
+
+@import "./styles/globals.css";

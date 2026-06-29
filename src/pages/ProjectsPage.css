@@ -1,0 +1,204 @@
+/* Cuberto-Style Projects Page Styles */
+
+.cb-entrylist {
+  padding-bottom: 8rem;
+  overflow: visible;
+}
+
+.cb-entrylist-header h1 {
+  font-family: var(--font-heading, "Plus Jakarta Sans", sans-serif);
+}
+
+.cb-entrylist-filters {
+  position: relative;
+  z-index: 10;
+}
+
+/* Interactive hover-text translation for filters */
+.cb-entrylist-filter {
+  position: relative;
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  background-color: rgba(13, 30, 61, 0.03);
+  border: 1px solid rgba(13, 30, 61, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-entrylist-filter:after {
+  content: "";
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  bottom: 6px;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-entrylist-filter.-active {
+  background-color: #0f3ca0;
+  color: #ffffff !important;
+  border-color: #0f3ca0;
+  box-shadow: 0 4px 12px rgba(15, 60, 160, 0.15);
+}
+
+.cb-entrylist-filter.-active:after {
+  display: none;
+}
+
+.cb-entrylist-filter-title {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.cb-entrylist-filter-title span {
+  display: block;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-entrylist-filter-title span:after {
+  content: attr(data-text);
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  font-weight: 800;
+}
+
+.cb-entrylist-filter:hover {
+  background-color: rgba(13, 30, 61, 0.06);
+  border-color: rgba(13, 30, 61, 0.1);
+}
+
+.cb-entrylist-filter.-active:hover {
+  background-color: #0f3ca0;
+  border-color: #0f3ca0;
+}
+
+.cb-entrylist-filter:hover .cb-entrylist-filter-title span {
+  transform: translateY(-100%);
+}
+
+/* Projects Staggered Cards Grid */
+.cb-entrylist-items {
+  transition: all 0.5s ease;
+}
+
+.cb-card {
+  display: block;
+  text-decoration: none;
+  max-width: 440px; /* limit width so it's not too broad */
+  width: 100%;
+}
+
+.cb-card-preview {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 500/650; /* Sleek vertical rectangle */
+  border-radius: 32px;
+  background-color: #e2eaf9;
+  border: 1px solid rgba(13, 30, 61, 0.04);
+  box-shadow: 0 8px 30px rgba(13, 30, 61, 0.02);
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s ease;
+}
+
+.cb-card:hover .cb-card-preview {
+  transform: scale(0.98) translate3d(0, -6px, 0);
+  border-color: var(--project-theme);
+  box-shadow: 
+    0 28px 56px -12px var(--project-glow, rgba(37, 99, 235, 0.3)),
+    0 12px 24px -10px rgba(0, 0, 0, 0.05);
+}
+
+.cb-card-preview-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  background-color: #faf7f2;
+}
+
+.cb-card-preview-media img,
+.cb-card-preview-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.005);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cb-card:hover .cb-card-preview-media img,
+.cb-card:hover .cb-card-preview-media video {
+  transform: scale(1.05);
+}
+
+.cb-card-caption {
+  max-width: 95%;
+  margin-top: 1.8rem;
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.cb-card-caption b {
+  font-family: var(--font-heading, "Plus Jakarta Sans", sans-serif);
+  font-size: 17px;
+  color: #0D1E3D;
+  transition: color 0.4s ease;
+}
+
+.cb-card:hover .cb-card-caption b {
+  color: var(--project-theme, #0f3ca0);
+}
+
+/* Stagger columns alignment helper */
+.cb-entrylist-item {
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .cb-entrylist-items.-cards .cb-entrylist-item {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Left column cards - align to the left side of the grid block */
+  .cb-entrylist-item:nth-child(2n+1) {
+    justify-content: flex-start;
+  }
+  
+  /* Right column cards - align to the right side of the grid block */
+  .cb-entrylist-item:nth-child(2n) {
+    justify-content: flex-end;
+  }
+}
+
+/* Smooth fade in for content lists */
+.cb-entrylist-items {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

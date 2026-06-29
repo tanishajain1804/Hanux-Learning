@@ -1,0 +1,69 @@
+.trail-badge-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: 1.5rem;
+  cursor: default;
+}
+
+.trail-badge-main {
+  position: relative;
+  z-index: 4;
+  padding: 5px 14px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: transform 0.25s ease;
+}
+
+.trail-badge-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
+}
+
+.trail-badge-ghost.ghost-1 {
+  transform: translateX(calc(4px * var(--trail-dir, 1)));
+  opacity: 0.3;
+  z-index: 3;
+}
+
+.trail-badge-ghost.ghost-2 {
+  transform: translateX(calc(8px * var(--trail-dir, 1)));
+  opacity: 0.15;
+  z-index: 2;
+}
+
+.trail-badge-ghost.ghost-3 {
+  transform: translateX(calc(12px * var(--trail-dir, 1)));
+  opacity: 0.07;
+  z-index: 1;
+}
+
+/* Hover dynamic trail expansion/compression */
+.trail-badge-container:hover .trail-badge-ghost.ghost-1 {
+  transform: translateX(calc(6px * var(--trail-dir, 1)));
+  opacity: 0.42;
+}
+
+.trail-badge-container:hover .trail-badge-ghost.ghost-2 {
+  transform: translateX(calc(12px * var(--trail-dir, 1)));
+  opacity: 0.24;
+}
+
+.trail-badge-container:hover .trail-badge-ghost.ghost-3 {
+  transform: translateX(calc(18px * var(--trail-dir, 1)));
+  opacity: 0.12;
+}
+

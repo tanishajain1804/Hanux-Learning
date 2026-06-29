@@ -1,0 +1,51 @@
+/* Custom CSS for the sticky/hover floating Navbar */
+
+/* Nav Item hover lines */
+.nav-link-line {
+  position: relative;
+}
+
+.nav-link-line::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Mega menu drop positions */
+.mega-menu-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-top: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50;
+}
+
+.nav-item-has-mega:hover .mega-menu-wrapper {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Keep navbar tab highlighted when dropdown is active */
+.nav-item-has-mega:hover > button {
+  color: #0f3ca0 !important;
+  background-color: rgba(37, 99, 235, 0.08) !important;
+}

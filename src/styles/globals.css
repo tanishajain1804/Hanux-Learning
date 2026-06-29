@@ -1,0 +1,28 @@
+@import "./variables.css";
+@import "./typography.css";
+@import "./animations.css";
+@import "./responsive.css";
+@import "./transitions.css";
+
+/* Base layout settings */
+body {
+  background-color: var(--bg);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Custom interactive selections */
+::selection {
+  background-color: var(--accent-light);
+  color: var(--text-primary);
+}
+
+/* Hide system cursor on desktop to allow custom Cuberto cursor to shine */
+@media (min-width: 768px) {
+  body, a, button, select, [role="button"], .cursor-pointer {
+    cursor: none !important;
+  }
+}
+
+

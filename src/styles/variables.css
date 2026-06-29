@@ -1,0 +1,42 @@
+:root {
+  /* Backgrounds & Surfaces (Off-White blended with light blue tints) */
+  --bg: #FAF9F6;  /* Set your off-white, light blue, or custom color here */;                        /* Premium Alabaster Off-White */
+  --bg2: #eef3fc;                       /* Light blue-slate contrast */
+  --bg3: #e2eaf9;                       /* Deeper light blue-slate */
+  
+  --surface: #ffffff;                   /* Card surfaces */
+  --surface2: #f4f7fe;                  /* Alt card surfaces */
+  
+  /* Borders */
+  --border: rgba(15, 60, 160, 0.09);    /* Royal blue border tint */
+  --border2: rgba(15, 60, 160, 0.16);
+  
+  /* Text */
+  --text: #0d1b3e;                      /* Deep royal navy */
+  --muted: #8298c0;                     /* Muted slate blue */
+  --muted2: #3d5a8a;                    /* Medium slate blue */
+  
+  /* Accents */
+  --accent: #0f3ca0;                    /* Core Royal Blue */
+  --accent2: #2563eb;                   /* Accent highlight / hover */
+  --accent3: #60a5fa;                   /* Soft bright blue */
+  --accent-glow: rgba(37, 99, 235, 0.28);
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  
+  /* Status */
+  --green: #10b981;
+  --green-bg: rgba(16, 185, 129, 0.10);
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --gold: #fbbf24;
+  --white: #ffffff;
+  --cream: #fffef8;
+  
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  
+  /* Custom Follower styling states */
+  --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
