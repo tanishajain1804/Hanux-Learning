@@ -245,29 +245,29 @@ export const CrmErpSystemsPage: React.FC = () => {
           </div>
 
           <div className="process-grid">
-            <div className="process-steps">
-              <div className={`pstep reveal ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
+            <div className="process-steps-aligned">
+              <div className={`pstep ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
                 <div className="pstep-num">1</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Silo & Flow Mapping</div>
                   <div className="pstep-desc">Auditing how departments (finance, sales, warehouse) exchange data to identify duplication gaps.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-1 ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
+              <div className={`pstep ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
                 <div className="pstep-num">2</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Unified Database Modeling</div>
                   <div className="pstep-desc">Building a central Postgres or SQL Server schema hosting all client, billing, and logistics entities.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-2 ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
+              <div className={`pstep ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
                 <div className="pstep-num">3</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Pipeline & API Integration</div>
                   <div className="pstep-desc">Connecting Stripe triggers, Salesforce webhooks, automated PDF generators, and alert emails.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-3 ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
+              <div className={`pstep ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
                 <div className="pstep-num">4</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Permissions Setup & Rollout</div>
@@ -276,7 +276,7 @@ export const CrmErpSystemsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="process-panel reveal">
+            <div className="process-panel-aligned">
               <div className={`panel-content ${activeStep === 0 ? "show" : ""}`}>
                 <div className="panel-icon">🔍</div>
                 <div className="panel-title">Silo & Flow Mapping</div>

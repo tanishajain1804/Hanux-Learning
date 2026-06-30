@@ -12,6 +12,7 @@ const CursorFollower: React.FC = () => {
   const mouseCoords = useRef({ x: 0, y: 0 });
   const followerCoords = useRef({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isHoveringDark, setIsHoveringDark] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,6 +33,78 @@ const CursorFollower: React.FC = () => {
   useEffect(() => {
     const updateCursorForElement = (target: HTMLElement) => {
       if (!target) return;
+      
+      const getBgStyleElement = (el: HTMLElement | null): HTMLElement | null => {
+        if (!el || el === document.body || el === document.documentElement) return null;
+        
+        const style = window.getComputedStyle(el);
+        const bg = style.backgroundColor;
+        const bgImg = style.backgroundImage;
+        
+        const isTransparent = (colorStr: string) => {
+          if (!colorStr || colorStr === "transparent") return true;
+          const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+          if (match) {
+            const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+            return a === 0;
+          }
+          return false;
+        };
+
+        const hasGradient = bgImg && bgImg !== "none" && bgImg.includes("gradient");
+
+        if ((bg && !isTransparent(bg)) || hasGradient) {
+          return el;
+        }
+        return getBgStyleElement(el.parentElement);
+      };
+
+      const isElementDark = (el: HTMLElement | null): boolean => {
+        if (!el) return false;
+        const style = window.getComputedStyle(el);
+        const bg = style.backgroundColor;
+        const bgImg = style.backgroundImage;
+
+        // 1. Check if background image contains a dark gradient
+        if (bgImg && bgImg !== "none" && bgImg.includes("gradient")) {
+          let totalLuminance = 0;
+          let count = 0;
+          const colorMatches = bgImg.matchAll(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/g);
+          for (const match of colorMatches) {
+            const r = parseInt(match[1]);
+            const g = parseInt(match[2]);
+            const b = parseInt(match[3]);
+            const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+            if (a > 0.1) {
+              const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+              totalLuminance += luminance;
+              count++;
+            }
+          }
+          if (count > 0) {
+            return (totalLuminance / count) < 140;
+          }
+        }
+
+        // 2. Check if background color is dark
+        if (bg) {
+          const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+          if (match) {
+            const r = parseInt(match[1]);
+            const g = parseInt(match[2]);
+            const b = parseInt(match[3]);
+            const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+            if (a === 0) return false;
+            const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+            return luminance < 140;
+          }
+        }
+
+        return false;
+      };
+
+      const bgElement = getBgStyleElement(target);
+      setIsHoveringDark(isElementDark(bgElement));
       
       // Show native text cursor and hide custom follower over inputs/textareas
       if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable) {
@@ -82,7 +155,7 @@ const CursorFollower: React.FC = () => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [setCursorType, setHoverText]);
+  }, [setCursorType, setHoverText, setIsHoveringDark]);
 
   // Outer Follower Animation loop (stretching & lag tracking)
   useEffect(() => {
@@ -144,19 +217,20 @@ const CursorFollower: React.FC = () => {
   if (!isVisible || cursorType === "hidden") return null;
 
   const isDarkPage = currentPath.startsWith("/services/");
+  const useWhiteCursor = isDarkPage || isHoveringDark;
 
   // Custom styling states for cursor size and color
   const stylesMap = {
-    default: isDarkPage
+    default: useWhiteCursor
       ? "w-6 h-6 border border-white/40 bg-transparent"
       : "w-6 h-6 border border-[#1F4096]/30 bg-transparent",
-    hover: isDarkPage
+    hover: useWhiteCursor
       ? "w-8 h-8 border border-white bg-white/10 scale-110"
       : "w-8 h-8 border border-[#1F4096] bg-[#1F4096]/5 scale-110",
-    text: isDarkPage
+    text: useWhiteCursor
       ? "w-14 h-14 bg-white text-[#0D1E3D] text-[10px] font-extrabold uppercase tracking-widest scale-100"
       : "w-14 h-14 bg-[#1F4096] text-white text-[10px] font-extrabold uppercase tracking-widest scale-100",
-    click: isDarkPage
+    click: useWhiteCursor
       ? "w-5 h-5 bg-white/20 border border-white/60 scale-90"
       : "w-5 h-5 bg-[#1F4096]/10 border border-[#1F4096]/50 scale-90"
   };
@@ -167,7 +241,7 @@ const CursorFollower: React.FC = () => {
       <div
         ref={dotRef}
         className={`hidden md:block fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] select-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-200 ${
-          isDarkPage ? "bg-white" : "bg-[#1F4096]"
+          useWhiteCursor ? "bg-white" : "bg-[#1F4096]"
         }`}
         style={{
           opacity: cursorType === "text" ? 0 : 1,

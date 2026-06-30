@@ -508,16 +508,21 @@
   align-items: start;
   margin-top: 4rem;
 }
-.service-detail-page .process-steps {
+.service-detail-page .process-steps-aligned {
   display: flex;
   flex-direction: column;
   gap: 0;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 0.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.40);
 }
 .service-detail-page .pstep {
   display: flex;
   gap: 1.25rem;
-  padding: 1.75rem;
-  border-radius: 16px;
+  padding: 1.25rem 1.75rem;
+  border-radius: 12px;
   border: 1px solid transparent;
   transition: all 0.3s var(--ease-out-expo);
   cursor: pointer;
@@ -539,9 +544,9 @@
   height: 38px;
 }
 .service-detail-page .pstep.active {
-  background: var(--surface2);
-  border-color: var(--border2);
-  box-shadow: 0 8px 40px rgba(37, 99, 235, 0.18);
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.06);
 }
 .service-detail-page .pstep-num {
   width: 38px;
@@ -588,9 +593,7 @@
 }
 
 /* Process visual panel */
-.service-detail-page .process-panel {
-  position: sticky;
-  top: 7rem;
+.service-detail-page .process-panel-aligned {
   background: var(--surface);
   border: 1px solid var(--border2);
   border-radius: 20px;

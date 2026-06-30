@@ -102,7 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             alt={title}
             className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-[#0d1e3d]/85 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-[#0d1e3d]/45 backdrop-blur-[6px] pointer-events-none z-10" />
           <video
             ref={videoRef}
             src={videoUrl}
@@ -208,7 +208,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
                hovered ? "opacity-100" : "opacity-0"
              }`}
            >
-             <div className="absolute inset-0 bg-[#0d1b3e]/30 z-20 pointer-events-none" />
+             <div className="absolute inset-0 bg-[#0d1b3e]/20 backdrop-blur-[6px] z-20 pointer-events-none" />
              <video
                ref={videoRef}
                src={videoUrl}

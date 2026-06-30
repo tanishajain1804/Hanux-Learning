@@ -113,11 +113,11 @@ export const Home: React.FC = () => {
             <div className="absolute w-[300px] h-[300px] rounded-full bg-white/5 left-[-50px] bottom-[-150px] pointer-events-none" />
             
             <div className="relative z-10 max-w-xl">
-              <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-[1.1] mb-3">
+              <h2 className="text-2xl md:text-4xl font-extrabold !text-white tracking-tight leading-[1.1] mb-3">
                 Let's Build Something<br />
-                <em className="font-serif italic font-normal text-white">Remarkable</em> Together
+                <em className="font-serif italic font-normal !text-white">Remarkable</em> Together
               </h2>
-              <p className="text-white/80 text-sm md:text-base leading-relaxed">
+              <p className="!text-white/80 text-sm md:text-base leading-relaxed">
                 Join 50+ companies who've scaled their engineering with Hanux Tech. Your next product starts with a conversation.
               </p>
             </div>
@@ -134,9 +134,12 @@ export const Home: React.FC = () => {
               </a>
               <a
                 href="/projects"
-                className="text-white/95 hover:text-white text-sm font-semibold inline-flex items-center gap-1 transition-colors"
+                className="px-6 py-3 text-sm font-semibold text-[#0f3ca0] bg-white hover:bg-slate-100 rounded-full shadow-lg transition-all duration-300 inline-flex items-center gap-2 cursor-pointer"
               >
-                View our work →
+                View our work
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 7h10M8 3l4 4-4 4" />
+                </svg>
               </a>
             </div>
           </div>

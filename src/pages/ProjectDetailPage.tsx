@@ -157,7 +157,7 @@ export const ProjectDetailPage: React.FC<{ projectKey: string }> = ({ projectKey
               </h3>
               <div className="flex flex-wrap gap-2">
                 {data.techStack.map((tech, idx) => (
-                  <span key={idx} className="tech-pill">
+                  <span key={idx} className="project-tech-pill">
                     {tech}
                   </span>
                 ))}

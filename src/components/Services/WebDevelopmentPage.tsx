@@ -324,29 +324,29 @@ export const WebDevelopmentPage: React.FC = () => {
           </div>
 
           <div className="process-grid">
-            <div className="process-steps">
-              <div className={`pstep reveal ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
+            <div className="process-steps-aligned">
+              <div className={`pstep ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
                 <div className="pstep-num">1</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Discovery & Architecture Scoping</div>
                   <div className="pstep-desc">Analyzing your requirements, mapping database schemas, and deciding on frontend/backend hosting frameworks.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-1 ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
+              <div className={`pstep ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
                 <div className="pstep-num">2</div>
                 <div className="pstep-body">
                   <div className="pstep-title">UI/UX Alignment & API Design</div>
                   <div className="pstep-desc">Designing high-fidelity screens in Figma and defining contract specifications for REST/GraphQL endpoints.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-2 ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
+              <div className={`pstep ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
                 <div className="pstep-num">3</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Agile Development & Integrations</div>
                   <div className="pstep-desc">Iterative sprints implementing modular components, styling systems, web socket events, and third-party integrations.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-3 ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
+              <div className={`pstep ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
                 <div className="pstep-num">4</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Performance Audit & Launch</div>
@@ -355,7 +355,7 @@ export const WebDevelopmentPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="process-panel reveal">
+            <div className="process-panel-aligned">
               <div className={`panel-content ${activeStep === 0 ? "show" : ""}`}>
                 <div className="panel-icon">🔍</div>
                 <div className="panel-title">Discovery & Architecture Scoping</div>

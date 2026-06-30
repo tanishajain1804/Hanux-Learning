@@ -321,29 +321,29 @@ export const MobileAppDevelopmentPage: React.FC = () => {
           </div>
 
           <div className="process-grid">
-            <div className="process-steps">
-              <div className={`pstep reveal ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
+            <div className="process-steps-aligned">
+              <div className={`pstep ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
                 <div className="pstep-num">1</div>
                 <div className="pstep-body">
                   <div className="pstep-title">UX Journey Storyboarding</div>
                   <div className="pstep-desc">Mapping mobile-first interactions, gestures, navigation hierarchies, and edge cases like offline states.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-1 ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
+              <div className={`pstep ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
                 <div className="pstep-num">2</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Native Bridge Design</div>
                   <div className="pstep-desc">Setting up custom native libraries, native capabilities permissions, and notification certificates.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-2 ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
+              <div className={`pstep ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
                 <div className="pstep-num">3</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Feature Engineering Sprints</div>
                   <div className="pstep-desc">Building UI views, connecting local offline databases (SQLite/Realm), and mapping cloud push notifications.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-3 ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
+              <div className={`pstep ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
                 <div className="pstep-num">4</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Store Submission & Launch</div>
@@ -352,7 +352,7 @@ export const MobileAppDevelopmentPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="process-panel reveal">
+            <div className="process-panel-aligned">
               <div className={`panel-content ${activeStep === 0 ? "show" : ""}`}>
                 <div className="panel-icon">🔍</div>
                 <div className="panel-title">UX Journey Storyboarding</div>

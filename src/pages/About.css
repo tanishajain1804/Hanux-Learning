@@ -1082,13 +1082,8 @@
 /* ── TWO VERTICAL FLIP CARDS ── */
 .about-page-wrap .lead-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
-}
-@media (max-width: 1024px) {
-  .about-page-wrap .lead-row {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 .about-page-wrap .lc {
   perspective: 1400px;

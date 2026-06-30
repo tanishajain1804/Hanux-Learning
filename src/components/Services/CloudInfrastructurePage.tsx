@@ -258,29 +258,29 @@ export const CloudInfrastructurePage: React.FC = () => {
           </div>
 
           <div className="process-grid">
-            <div className="process-steps">
-              <div className={`pstep reveal ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
+            <div className="process-steps-aligned">
+              <div className={`pstep ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
                 <div className="pstep-num">1</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Security & Scale Audit</div>
                   <div className="pstep-desc">Reviewing hosting bills, CPU bottlenecks, and database read/write locks to map an optimal path.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-1 ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
+              <div className={`pstep ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
                 <div className="pstep-num">2</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Infrastructure Scripting (IaC)</div>
                   <div className="pstep-desc">Drafting Terraform files configuring virtual private networks (VPCs), subnets, clusters, and policies.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-2 ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
+              <div className={`pstep ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
                 <div className="pstep-num">3</div>
                 <div className="pstep-body">
                   <div className="pstep-title">CI/CD Pipeline Construction</div>
                   <div className="pstep-desc">Configuring GitHub Actions or GitLab pipelines to build, test, and release Docker containers automatically.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-3 ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
+              <div className={`pstep ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
                 <div className="pstep-num">4</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Chaos Audit & Monitoring</div>
@@ -289,7 +289,7 @@ export const CloudInfrastructurePage: React.FC = () => {
               </div>
             </div>
 
-            <div className="process-panel reveal">
+            <div className="process-panel-aligned">
               <div className={`panel-content ${activeStep === 0 ? "show" : ""}`}>
                 <div className="panel-icon">🔍</div>
                 <div className="panel-title">Security & Scale Audit</div>

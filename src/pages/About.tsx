@@ -38,39 +38,6 @@ const LEADERSHIP: LeadershipMember[] = [
     tags: ["Terraform", "AWS ECS", "Delivery Ops", "Kubernetes"],
     statText: "99.9% uptime across every deploy",
     gradient: "linear-gradient(135deg,#0ea68c,#34d399)"
-  },
-  {
-    i: 2,
-    initials: "SM",
-    name: "Shreya Mishra",
-    role: "Senior Full-Stack Engineer",
-    shortLine: "5 years of TypeScript, zero tolerance for untyped APIs.",
-    bio: "5 years of TypeScript, zero tolerance for untyped APIs. Shipped the fastest MVP in HanuxTech history — 5.5 weeks from brief to live on AWS.",
-    tags: ["TypeScript", "Next.js", "GraphQL", "NestJS"],
-    statText: "Shipped fastest MVP (5.5 weeks)",
-    gradient: "linear-gradient(135deg,#f59e0b,#fcd34d)"
-  },
-  {
-    i: 3,
-    initials: "VN",
-    name: "Vikram Nair",
-    role: "AI & ML Integration Lead",
-    shortLine: "Ex-Swiggy ML team. Specialises in embedding LLMs.",
-    bio: "Ex-Swiggy ML team. Specialises in embedding LLMs into real products. Has shipped 8 production AI features in the last 18 months — not demos, real products.",
-    tags: ["Python", "LangChain", "OpenAI", "RAG", "FastAPI"],
-    statText: "Shipped 8 production AI features",
-    gradient: "linear-gradient(135deg,#ef4444,#f87171)"
-  },
-  {
-    i: 4,
-    initials: "DP",
-    name: "Divya Pillai",
-    role: "QA & Performance Lead",
-    shortLine: "6 years finding bugs. Lighthouse scores >90.",
-    bio: "6 years finding bugs before users do. Lighthouse scores above 90 on every build she touches. Every test suite ships with 80%+ coverage.",
-    tags: ["Cypress", "Playwright", "k6", "Jest", "Lighthouse"],
-    statText: "80%+ unit test coverage",
-    gradient: "linear-gradient(135deg,#0ea68c,#60a5fa)"
   }
 ];
 
@@ -1098,7 +1065,7 @@ export const About: React.FC = () => {
               tabIndex={0}
               role="button"
               data-cursor="text"
-              data-cursor-text="FLIP"
+              data-cursor-text={flippedCard === idx ? "CLOSE" : "FLIP"}
             >
               <div className="pc-inner">
                 <div className="pc-front">
@@ -1187,6 +1154,8 @@ export const About: React.FC = () => {
                   data-rv
                   className={getRvClass(`rv-lc-${lead.i}`, "rv", `lc ${isFlipped ? "flipped" : ""}`)}
                   onClick={() => handleFlipLeadCard(lead.i)}
+                  data-cursor="text"
+                  data-cursor-text={isFlipped ? "CLOSE" : "FLIP"}
                   tabIndex={0}
                   role="button"
                   onKeyDown={(e) => {

@@ -102,7 +102,7 @@ const ProjectPageCard: React.FC<{ project: ProjectItem; className?: string }> = 
           className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
         />
         {/* Dark overlay tint */}
-        <div className="absolute inset-0 bg-[#0d1e3d]/85 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-[#0d1e3d]/20 pointer-events-none z-10" />
 
         {/* Video Loop */}
         <video

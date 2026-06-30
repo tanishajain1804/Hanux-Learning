@@ -77,23 +77,23 @@
 }
 
 /* Tech tag styling */
-.tech-pill {
+.project-tech-pill {
   font-size: 11px;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 99px;
   background-color: #ffffff;
   color: #334155;
-  border: 1px solid rgba(13, 27, 62, 0.06);
+  border: 1px solid rgba(13, 27, 62, 0.1);
   transition: all 0.25s ease;
 }
 
-.tech-pill:hover {
-  background-color: var(--theme-color);
-  color: #ffffff;
+.project-tech-pill:hover {
+  background-color: var(--glow-color);
+  color: var(--theme-color);
   border-color: var(--theme-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px -2px var(--glow-color);
+  box-shadow: 0 4px 12px -2px var(--glow-color);
 }
 
 /* Back Link text */

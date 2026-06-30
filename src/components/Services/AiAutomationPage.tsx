@@ -246,29 +246,29 @@ export const AiAutomationPage: React.FC = () => {
           </div>
 
           <div className="process-grid">
-            <div className="process-steps">
-              <div className={`pstep reveal ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
+            <div className="process-steps-aligned">
+              <div className={`pstep ${activeStep === 0 ? "active" : ""}`} onClick={() => handleStepClick(0)}>
                 <div className="pstep-num">1</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Operational Pipeline Audit</div>
                   <div className="pstep-desc">Analyzing your support queues, logs, and sheets to identify high-return bottlenecks suited for AI agent automation.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-1 ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
+              <div className={`pstep ${activeStep === 1 ? "active" : ""}`} onClick={() => handleStepClick(1)}>
                 <div className="pstep-num">2</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Vector DB & Prompt Scoping</div>
                   <div className="pstep-desc">Setting up data pipelines, chunking policies, vector indexes (Pinecone/Chroma), and system prompts.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-2 ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
+              <div className={`pstep ${activeStep === 2 ? "active" : ""}`} onClick={() => handleStepClick(2)}>
                 <div className="pstep-num">3</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Agent Integration Sprints</div>
                   <div className="pstep-desc">Developing fail-safe loops, integrating tools execution (APIs, DB calls), and building verification interfaces.</div>
                 </div>
               </div>
-              <div className={`pstep reveal reveal-delay-3 ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
+              <div className={`pstep ${activeStep === 3 ? "active" : ""}`} onClick={() => handleStepClick(3)}>
                 <div className="pstep-num">4</div>
                 <div className="pstep-body">
                   <div className="pstep-title">Performance Evaluation & Launch</div>
@@ -277,7 +277,7 @@ export const AiAutomationPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="process-panel reveal">
+            <div className="process-panel-aligned">
               <div className={`panel-content ${activeStep === 0 ? "show" : ""}`}>
                 <div className="panel-icon">🔍</div>
                 <div className="panel-title">Operational Pipeline Audit</div>

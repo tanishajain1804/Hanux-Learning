@@ -126,10 +126,10 @@ const ServiceCard: React.FC<{ svc: ServiceItem }> = ({ svc }) => {
       {/* Dynamic Hover Video Loop Overlay */}
       <div 
         className={`absolute inset-0 z-0 transition-opacity duration-500 ease-in-out ${
-          hovered ? "opacity-100" : "opacity-0"
+          hovered ? "opacity-25" : "opacity-0"
         }`}
       >
-        <div className="absolute inset-0 bg-[#0d1b3e]/35 z-20 pointer-events-none" />
+        <div className="absolute inset-0 z-20 pointer-events-none" style={{ backgroundColor: svc.themeColor + "26" }} />
         <video
           ref={videoRef}
           src={svc.videoUrl}
@@ -138,7 +138,7 @@ const ServiceCard: React.FC<{ svc: ServiceItem }> = ({ svc }) => {
           autoPlay
           playsInline
           preload="auto"
-          className="w-full h-full object-cover scale-100"
+          className="w-full h-full object-cover scale-105 filter blur-[6px]"
         />
       </div>
 
@@ -166,12 +166,12 @@ const ServiceCard: React.FC<{ svc: ServiceItem }> = ({ svc }) => {
         </div>
         
         {/* Title */}
-        <h3 className="text-base font-bold text-[#0D1E3D] mb-3 group-hover:text-white transition-colors duration-200">
+        <h3 className="text-base font-bold text-[#0D1E3D] mb-3 transition-colors duration-200">
           {svc.title}
         </h3>
         
         {/* Description */}
-        <p className="text-[13px] text-[#475569] group-hover:text-white/85 leading-relaxed mb-6 transition-colors duration-200">
+        <p className="text-[13px] text-[#475569] leading-relaxed mb-6 transition-colors duration-200">
           {svc.description}
         </p>
       </div>
