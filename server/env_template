@@ -1,0 +1,14 @@
+# HANUX TECH SERVER ENVIRONMENT VARIABLES
+PORT=5000
+
+# SMTP CONFIGURATION (Configure these for production)
+# For testing locally, if these are left blank, the server will automatically
+# create a temporary test account using smtp.ethereal.email and print a link
+# in the console where you can view the sent emails in your browser!
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=
+EMAIL_PASS=
+
+# ADMIN ALERTS RECEIVER
+ADMIN_RECEIVER=info@hanuxtech.com
