@@ -26,7 +26,7 @@
   font-family: var(--sans);
   background-color: var(--bg);
   color: var(--text);
-  overflow-x: hidden;
+  overflow-x: clip;
   min-height: 100%;
 }
 
@@ -498,6 +498,71 @@
 }
 
 /* ── HOW WE WORK ── */
+@media(min-width: 769px) {
+  .service-detail-page .process-sticky-track {
+    position: relative;
+    height: 240vh; /* The height determines the duration of scroll pinning */
+  }
+  .service-detail-page .process-section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 !important;
+  }
+  .service-detail-page .process-section .section-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .service-detail-page .process-section .section-eyebrow {
+    margin-bottom: 0.4rem;
+  }
+  .service-detail-page .process-section .section-title {
+    margin-bottom: 0.6rem;
+  }
+  .service-detail-page .process-section .section-sub {
+    margin-bottom: 0;
+  }
+  .service-detail-page .process-grid {
+    margin-top: 1.5rem !important;
+    gap: 3rem !important;
+  }
+  .service-detail-page .pstep {
+    padding: 0.75rem 1.25rem !important;
+    gap: 1rem !important;
+  }
+  .service-detail-page .pstep-title {
+    margin-bottom: 0.2rem !important;
+  }
+  .service-detail-page .pstep::before {
+    left: 2.43rem !important;
+  }
+  .service-detail-page .pstep:not(:last-child).active::before {
+    height: 24px !important;
+  }
+  .service-detail-page .process-panel-aligned {
+    padding: 1.5rem !important;
+  }
+  .service-detail-page .panel-icon {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .service-detail-page .panel-title {
+    margin-bottom: 0.5rem !important;
+  }
+  .service-detail-page .panel-tags {
+    margin-top: 0.75rem !important;
+  }
+  .service-detail-page .panel-progress {
+    margin-top: 1rem !important;
+    padding-top: 1rem !important;
+  }
+}
+
 .service-detail-page .process-section {
   background: linear-gradient(180deg, var(--bg2), var(--bg3));
 }

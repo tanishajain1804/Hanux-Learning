@@ -704,3 +704,7 @@
   color: #9ca3af;
   font-weight: 600;
 }
+
+.country-list-item-hover:hover {
+  background-color: #f1f5f9 !important;
+}

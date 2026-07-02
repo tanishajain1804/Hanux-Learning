@@ -100,16 +100,38 @@ const BookingWidget: React.FC<{ themeColors: { primary: string; secondary: strin
     return d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
+    const ref = "HTX-" + Math.floor(100000 + Math.random() * 900000);
+    setBookingRef(ref);
+
+    try {
+      const response = await fetch(`http://${window.location.hostname}:5000/api/booking`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          serviceName: selectedServiceObj?.name || "Consultation Call",
+          date: selectedDate ? selectedDate.toLocaleDateString() : new Date().toLocaleDateString(),
+          timeSlot: selectedTime || "09:30 AM",
+          bookingRef: ref,
+          notes: formData.notes
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`Server returned status ${response.status}`);
+      }
+    } catch (err: any) {
+      console.error("Failed to dispatch booking confirmation email:", err);
+      alert(`Error scheduling meeting: ${err.message}. Please ensure the backend server is running on Port 5000 and matches the dynamic network IP.`);
+    } finally {
       setIsSubmitting(false);
-      setBookingRef("HTX-" + Math.floor(100000 + Math.random() * 900000));
       setStep(4);
-    }, 1500);
+    }
   };
 
   const selectedServiceObj = services.find(s => s.id === selectedService);

@@ -37,10 +37,26 @@ export const FAQ: React.FC = () => {
   const [msg, setMsg] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
     setSubmitted(true);
+
+    try {
+      await fetch(`http://${window.location.hostname}:5000/api/inquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          serviceName: "General Project Inquiry (FAQ Component)",
+          projectDetails: msg
+        })
+      });
+    } catch (err) {
+      console.error("Failed to submit inquiry from FAQ:", err);
+    }
+
     setName("");
     setEmail("");
     setMsg("");

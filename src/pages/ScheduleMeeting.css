@@ -861,3 +861,7 @@
   background: var(--accent-soft);
   transform: translateY(-1px);
 }
+
+.country-list-item-hover:hover {
+  background-color: #f1f5f9 !important;
+}

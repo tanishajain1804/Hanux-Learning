@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import "./ServiceDetailPage.css";
 
@@ -11,19 +11,9 @@ export const WebDevelopmentPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isFloatCtaVisible, setIsFloatCtaVisible] = useState(false);
 
-  const autoRotateRef = useRef<any>(null);
-
-  const startAutoRotation = () => {
-    if (autoRotateRef.current) clearInterval(autoRotateRef.current);
-    autoRotateRef.current = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 4);
-    }, 4000);
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     setActiveStep(0);
-    startAutoRotation();
 
     const handleScroll = () => {
       setIsFloatCtaVisible(window.scrollY > 400);
@@ -43,26 +33,91 @@ export const WebDevelopmentPage: React.FC = () => {
           el.classList.add("revealed");
         }
       });
+
+      // Scroll-linked process steps
+      const track = document.getElementById("process-track");
+      if (track) {
+        const rect = track.getBoundingClientRect();
+        
+        if (window.innerWidth > 768) {
+          // Desktop: sticky pin scroll mapping
+          const scrolled = -rect.top;
+          const totalScrollTrack = rect.height - window.innerHeight;
+          let progress = 0;
+          if (scrolled > 0 && totalScrollTrack > 0) {
+            progress = scrolled / totalScrollTrack;
+          }
+          progress = Math.max(0, Math.min(0.999, progress));
+          const step = Math.floor(progress * 4);
+          setActiveStep(Math.min(3, step));
+        } else {
+          // Mobile: standard scroll tracking
+          const elementHeight = rect.height;
+          const elementTop = rect.top;
+          const viewportCenter = window.innerHeight / 2;
+          const elementCenter = elementTop + elementHeight / 2;
+          const startPoint = viewportCenter + elementHeight / 2;
+          const endPoint = viewportCenter - elementHeight / 2;
+          
+          let progress = (startPoint - elementCenter) / (startPoint - endPoint);
+          progress = Math.max(0, Math.min(0.999, progress));
+          const step = Math.floor(progress * 4);
+          setActiveStep(step);
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     setTimeout(handleScroll, 200);
 
     return () => {
-      if (autoRotateRef.current) clearInterval(autoRotateRef.current);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleStepClick = (idx: number) => {
-    setActiveStep(idx);
-    startAutoRotation();
+    const track = document.getElementById("process-track");
+    if (track) {
+      const rect = track.getBoundingClientRect();
+      const elementAbsoluteTop = rect.top + window.scrollY;
+      
+      let targetScrollY = 0;
+      if (window.innerWidth > 768) {
+        const totalScrollTrack = rect.height - window.innerHeight;
+        const progress = (idx + 0.5) / 4;
+        targetScrollY = elementAbsoluteTop + progress * totalScrollTrack;
+      } else {
+        const progress = (idx + 0.5) / 4;
+        targetScrollY = elementAbsoluteTop - window.innerHeight / 2 + progress * rect.height;
+      }
+      
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: "smooth"
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
     setSubmitted(true);
+
+    try {
+      await fetch(`http://${window.location.hostname}:5000/api/inquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          serviceName: "Full-Stack Web Development",
+          projectDetails: projectText
+        })
+      });
+    } catch (err) {
+      console.error("Failed to submit inquiry:", err);
+    }
+
     setName("");
     setEmail("");
     setProjectText("");
@@ -315,7 +370,8 @@ export const WebDevelopmentPage: React.FC = () => {
       </div>
 
       {/* PROCESS */}
-      <section className="process-section" id="process">
+      <div className="process-sticky-track" id="process-track">
+        <section className="process-section" id="process">
         <div className="section-inner">
           <div className="reveal">
             <div className="section-eyebrow">How We Work</div>
@@ -494,7 +550,8 @@ export const WebDevelopmentPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* CAPABILITIES */}
       <section className="caps-section">

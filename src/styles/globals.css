@@ -23,6 +23,11 @@ body {
   body, a, button, select, [role="button"], .cursor-pointer {
     cursor: none !important;
   }
+  
+  /* Restore native text input cursor on text fields and textareas */
+  input, textarea, [contenteditable="true"] {
+    cursor: text !important;
+  }
 }
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import "./ServiceDetailPage.css";
 
@@ -10,8 +10,6 @@ export const UiUxDesignSystemsPage: React.FC = () => {
   const [projectText, setProjectText] = useState("Hi, I'm interested in discussing your UI/UX Design Systems services for my project...");
   const [submitted, setSubmitted] = useState(false);
   const [isFloatCtaVisible, setIsFloatCtaVisible] = useState(false);
-
-  const autoRotateRef = useRef<any>(null);
 
   const [cyclingWordIdx, setCyclingWordIdx] = useState(0);
   const [cyclingWordOpacity, setCyclingWordOpacity] = useState(1);
@@ -28,17 +26,9 @@ export const UiUxDesignSystemsPage: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const startAutoRotation = () => {
-    if (autoRotateRef.current) clearInterval(autoRotateRef.current);
-    autoRotateRef.current = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 4);
-    }, 4000);
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
     setActiveStep(0);
-    startAutoRotation();
 
     const handleScroll = () => {
       setIsFloatCtaVisible(window.scrollY > 400);
@@ -58,26 +48,99 @@ export const UiUxDesignSystemsPage: React.FC = () => {
           el.classList.add("revealed");
         }
       });
+
+      // Scroll-linked process steps with sticky pinning
+      const track = document.getElementById("process-track");
+      if (track) {
+        const rect = track.getBoundingClientRect();
+        
+        // On mobile/tablet, do standard viewport position mapping
+        if (window.innerWidth <= 768) {
+          const elementHeight = rect.height;
+          const elementTop = rect.top;
+          const viewportCenter = window.innerHeight / 2;
+          const elementCenter = elementTop + elementHeight / 2;
+          const startPoint = viewportCenter + elementHeight / 2;
+          const endPoint = viewportCenter - elementHeight / 2;
+          
+          let progress = (startPoint - elementCenter) / (startPoint - endPoint);
+          progress = Math.max(0, Math.min(0.999, progress));
+          
+          const step = Math.floor(progress * 4);
+          setActiveStep(step);
+          return;
+        }
+
+        // On desktop, do sticky scroll pinning progress mapping
+        if (window.innerWidth > 768) {
+          const scrolled = -rect.top;
+          const totalScrollTrack = rect.height - window.innerHeight;
+          let progress = 0;
+          if (scrolled > 0 && totalScrollTrack > 0) {
+            progress = scrolled / totalScrollTrack;
+          }
+          progress = Math.max(0, Math.min(0.999, progress));
+          const step = Math.floor(progress * 4);
+          setActiveStep(Math.min(3, step));
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     setTimeout(handleScroll, 200);
 
     return () => {
-      if (autoRotateRef.current) clearInterval(autoRotateRef.current);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleStepClick = (idx: number) => {
-    setActiveStep(idx);
-    startAutoRotation();
+    const track = document.getElementById("process-track");
+    if (track) {
+      const rect = track.getBoundingClientRect();
+      const elementAbsoluteTop = rect.top + window.scrollY;
+      
+      if (window.innerWidth <= 768) {
+        // Mobile fallback
+        const progress = (idx + 0.5) / 4;
+        const targetScrollY = elementAbsoluteTop - window.innerHeight / 2 + progress * rect.height;
+        window.scrollTo({
+          top: targetScrollY,
+          behavior: "smooth"
+        });
+        return;
+      }
+
+      // Desktop sticky scroll mapping
+      const progress = (idx + 0.5) / 4;
+      const targetScrollY = elementAbsoluteTop + progress * (rect.height - window.innerHeight);
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: "smooth"
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
     setSubmitted(true);
+
+    try {
+      await fetch(`http://${window.location.hostname}:5000/api/inquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          serviceName: "UI/UX Design Systems",
+          projectDetails: projectText
+        })
+      });
+    } catch (err) {
+      console.error("Failed to submit inquiry:", err);
+    }
+
     setName("");
     setEmail("");
     setProjectText("");
@@ -466,7 +529,8 @@ export const UiUxDesignSystemsPage: React.FC = () => {
       </div>
 
       {/* PROCESS */}
-      <section className="process-section" id="process">
+      <div className="process-sticky-track" id="process-track">
+        <section className="process-section" id="process">
         <div className="section-inner">
           <div className="reveal">
             <div className="section-eyebrow">How We Work</div>
@@ -646,6 +710,7 @@ export const UiUxDesignSystemsPage: React.FC = () => {
           </div>
         </div>
       </section>
+      </div>
 
       {/* CAPABILITIES */}
       <section className="caps-section">
